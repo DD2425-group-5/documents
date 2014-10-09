@@ -1,0 +1,37 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage[top=1cm]{geometry}
+\usepackage{subfigure}
+\defaultfontfeatures{Mapping=tex-text}
+\setromanfont[Ligatures={Common},Numbers={Lining}]{Linux Libertine}
+\author{Michal Staniaszek}
+\title{DD2425 Picture page: Group 5}
+
+\renewcommand{\thesubfigure}{} % no numbering for subfigure captions
+
+\begin{document}
+
+\maketitle
+\begin{figure}[!h]
+  \centering
+  \subfigure[Alan Khudur]{
+    \includegraphics[width=3cm]{../images/alan.jpg}
+  }
+  \subfigure[Christoffer Janson]{
+    \includegraphics[width=3cm]{../images/christoffer.jpg}
+  }\\
+  \subfigure[Dmitrij Lioubartsev]{
+    \includegraphics[width=3cm]{../images/dmitrij.jpg}
+  }
+  \subfigure[Yavor Trassiev]{
+    \includegraphics[width=3cm]{../images/yavor.jpg}
+  }\\
+  \subfigure[Michal Staniaszek]{
+    \includegraphics[width=3cm]{../images/michal.jpg}
+  }
+  \caption{Group 5 team members.}
+\end{figure}
+
+
+\end{document}

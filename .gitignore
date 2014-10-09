@@ -1,0 +1,11 @@
+# Emacs
+\#*
+*~
+.#*
+
+# LaTeX
+*.log
+*.aux
+
+# AUCTex
+auto
