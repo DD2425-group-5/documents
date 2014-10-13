@@ -1,0 +1,51 @@
+** Tasks
+*** Project plan: Deadline [2014-10-15 Wed]
+*** Progress report: Deadline [2014-10-15 Wed]    
+*** Milestone 0: Deadline [2014-10-23 Thu]
+**** Design Robot
+     [2014-09-30 Tue] - added task 
+**** Calibrate wheels
+     [2014-09-30 Tue] - added task
+**** Calibrate and set up RGB-D sensor
+     [2014-09-30 Tue] - added task
+**** Sending signals to the wheels through Arduino
+     [2014-09-30 Tue] - added task
+**** Blob detection
+     [2014-09-30 Tue] - added task
+**** Image processing -> motor control
+     [2014-09-30 Tue] - added task
+**** Turn to centre object then move towards it. Vector based control
+     [2014-09-30 Tue] - added task
+*** Milestone 1: Deadline [2014-10-15 Wed]
+**** Complete mechanical structure
+     [2014-10-02 Thu] - added task
+***** Hull
+***** Sensors
+****** IR sensor positions
+**** Wall following
+     [2014-10-02 Thu] - added task
+***** 90 degree turn management
+      [2014-10-02 Thu] - added task
+***** IR sensor calibrations
+      [2014-10-02 Thu] - added task
+***** Keeping specific distance from the wall
+      [2014-10-02 Thu] - added task
+***** RGB-D sensor wall/floor following
+      [2014-10-02 Thu] - added task
+**** Object identification
+     [2014-10-02 Thu] - added task
+***** Object/feature database
+      [2014-10-02 Thu] - added task
+***** Sliding window detection
+      [2014-10-02 Thu] - added task
+***** Feature based detection
+      [2014-10-02 Thu] - added task
+***** Feature comparison method
+      [2014-10-02 Thu] - added task
+** Discussion
+*** [2014-09-30 Tue]
+    Talked about what was needed for the first milestone. Just vague ideas at
+    this point.
+*** [2014-10-02 Thu]
+    Worked on lab together, task breakdown for milestone 1, discussing the
+    project plan and meeting times
