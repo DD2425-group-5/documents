@@ -41,7 +41,7 @@
 *** Turn to centre object then move towards it. Vector based control
 **** [2014-09-30 Tue] 
      added task
-** Milestone 1: Deadline [2014-11-07 Fri]
+** Milestone 1: Deadline [2014-11-12 Wed]
 *** Complete mechanical structure
 **** [2014-10-02 Thu] 
      added task
@@ -78,6 +78,8 @@
 **** Feature comparison method
 ***** [2014-10-02 Thu] 
       added task
+** Milestone 2: Deadline [2014-11-26 Wed]
+** Milestone 3: Deadline [2014-12-05 Fri]
 * Discussion
 ** [2014-09-30 Tue]
    Talked about what was needed for the first milestone. Just vague ideas at
