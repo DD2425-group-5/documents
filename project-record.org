@@ -1,7 +1,27 @@
+* Emacs commands
+  Ctrl-c ! - insert date
+  Ctrl-k kill line
+  Ctrl-y paste line
 * Tasks
 ** Project plan: Deadline [2014-10-15 Wed]
 ** Progress report: Deadline [2014-10-15 Wed]    
 ** Milestone 0: Deadline [2014-10-23 Thu]
+*** GitHub, NUC Setup
+**** [2014-10-14 Tue]
+     Completed set up of the user accounts, and set up access to git for some
+     people.
+**** [2014-10-15 Wed]
+     Assigned Michal
+**** [2014-10-16 Thu]
+     Set up some scripts to make initialisation and git setup easier.
+**** [2014-10-18 Sat]
+     Wrote a script to allow file transfer between computers using rsync.
+     Should make it possible to work on code on a laptop and then transfer the
+     code to the NUC (with deleted files and so on), and run things on there.
+**** [2014-10-21 Tue]
+     Tried to get catkin_make to build custom libraries. No success yet, some
+     problems with recompilation not being done when header files are updated,
+     so the files which use the library headers are not compiled correctly.
 *** Design Robot
 **** [2014-09-30 Tue]
      added task 
@@ -11,10 +31,8 @@
      second level circular, so that if the robot hits a wall it is still
      possible to rotate without getting stuck. By the end of the day we
      constructed the two planned layers.
-*** Calibrate wheels
-**** [2014-09-30 Tue]
-     added task
-
+**** [2014-10-15 Wed]
+     Assigned Yavor and Michal to finish the basic build.
 *** Calibrate and set up RGB-D sensor
 **** [2014-09-30 Tue]
      added task
@@ -29,18 +47,43 @@
      suggests the use of /camera/depth/image_rect. Also, perhaps need to
      consider the use of depth registration to match colour/depth images to
      each other (http://wiki.ros.org/openni_launch/Tutorials/QuickStart)
-*** Sending signals to the wheels through Arduino
+**** [2014-10-15 Wed]
+     Assigned Dmitrij and Michal
+*** Motor controller
 **** [2014-09-30 Tue]
      added task
+**** [2014-10-15 Wed]
+     Assigned Alan, Yavor and Christoffer
+**** [2014-10-16 Thu]
+     Motor controller converted to an object. Topics are now defined by
+     extracting data from the parameter server. Topic information defined in
+     a .yaml file in the launch repository. Should make it more difficult to
+     make mistakes related to incorrect topic usage.
+**** [2014-10-20 Mon]
+     Started on converting the motor controller to use parameter server
+     properly, wrote some stuff to read parameters from the parameter server in
+     a nice way.
 *** Blob detection
 **** [2014-09-30 Tue]
-     added task
-*** Image processing -> motor control
+     added 
+**** [2014-10-15 Wed]
+     Assigned Dmitrij and Michal
+**** [2014-10-17 Fri]
+     Worked on implementing blob detection. Came across issues with conversion
+     to the correct image format for the blob detection algorithm in OpenCV.
+     Needed to convert the sensor_msgs/Image to a TYPE_32FC1 using cv_bridge
+     and then extract floats from the resulting matrix. Using doubles resulted
+     in getting huge values (2e308 or so) and quite a lot of wasted time. In
+     order to pass to the blob detection the image needs to be converted such
+     that its values are between 0 and 255, and then converted using the
+     CV_8UC1 format, otherwise the thresholding complains. Still have some
+     issues where the blob which is being selected is not the closest one, but
+     the one furthest away.
+*** Hand following controller
 **** [2014-09-30 Tue]
-     added task
-*** Turn to centre object then move towards it. Vector based control
-**** [2014-09-30 Tue] 
-     added task
+     Added task.
+**** [2014-10-15 Wed]
+     Assigned Christoffer, Alan and Dmitrij.
 ** Milestone 1: Deadline [2014-11-12 Wed]
 *** Complete mechanical structure
 **** [2014-10-02 Thu] 
@@ -48,8 +91,14 @@
 **** Hull
 **** Sensors
 ***** IR sensor positions
+*** Getting custom libraries to work
+**** [2014-10-22 Wed]
+     added task
+*** Motor controller calibration and modification
+**** [2014-10-22 Wed]
+     added task
 *** Wall following
-****  [2014-10-02 Thu]
+**** [2014-10-02 Thu]
       added task
 **** 90 degree turn management
 ***** [2014-10-02 Thu]
@@ -63,12 +112,21 @@
 **** RGB-D sensor wall/floor following
 ***** [2014-10-02 Thu] 
       added task
+**** Keeping centred in a corridor
+***** [2014-10-22 Wed]
 *** Object identification
 **** [2014-10-02 Thu] 
-     added task
+     Added task
+**** [2014-10-15 Wed]
+     Some sort of colour based identification seems to be a good way of finding
+     objects?
+**** Object extraction from image
+     [2014-10-22 Wed]
 **** Object/feature database
 ***** [2014-10-02 Thu]
       added task
+**** Bayesian classification
+     [2014-10-22 Wed]
 **** Sliding window detection
 ***** [2014-10-02 Thu] 
       added task
@@ -79,7 +137,32 @@
 ***** [2014-10-02 Thu] 
       added task
 ** Milestone 2: Deadline [2014-11-26 Wed]
+*** Map building
+**** [2014-10-15 Wed]
+     Added task. Discussed various ways of map building using the RGB-D sensor,
+     and whether or not we will need SLAM. Can also make use of wall following
+     to build a simple map.
+*** Map storage and processing
+**** [2014-10-15 Wed]
+     Added task. Process the noisy map into some form which is more readable
+     and usable for the second stage of the challenge.
+**** Store object positions and IDs in the map
+**** Showing the map with object positions
+**** Saving map to disk
+     Periodically save the map during operation to make sure that the map is
+     not lost if something goes wrong. Also need to be able to load the map
+     from disk into memory so that it can be used.
+**** Modify map based on robot size
+*** Extend object detection to all objects
+**** [2014-10-15 Wed]
+     Added task
 ** Milestone 3: Deadline [2014-12-05 Fri]
+*** Localisation
+**** [2014-10-15 Wed]
+     Added task
+*** Path planning
+**** [2014-10-15 Wed]
+     Added task
 * Discussion
 ** [2014-09-30 Tue]
    Talked about what was needed for the first milestone. Just vague ideas at
@@ -96,3 +179,5 @@
 
    Set up a group robo on the ras15 nuc so that everyone can modify the stuff
    in there. The main repository will be stored in that user.
+** [2014-10-15 Wed]
+   Had a group meeting to complete the weekly progress report.
