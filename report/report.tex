@@ -4,6 +4,8 @@
 \usepackage{graphicx}
 \usepackage[backend=bibtex]{biblatex}
 \usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{listings}
 \bibliography{report.bib}
 \author{Christoffer Jansson \and Alan Khudur \and Dmitrij Lioubartsev \and Michal Staniaszek \and Yavor Trasiev}
 \title{DD2425 Robotics and Autonomous Systems Final Report}
@@ -81,14 +83,93 @@ performance of each of the subsystems.
 \end{figure}
 \section{Controllers}
 \section{Wall Following and Exploration}
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{images/maze.jpg}
+  \caption{The maze}
+  \label{fig:maze}
+\end{figure}
 \section{Vision}
 \section{Mapping}
 In order to perform the task required in the second phase more efficiently, it
 must be possible to 
 \section{Localisation and Navigation}
+\section{Work Environment}
+\subsection{Version Control}
+For source control, we used \texttt{git}, with repositories on GitHub. Each of
+us had a separate account on GitHub, but we all committed to the same set of
+repositories which were created in an Organisation on the site. We had separate
+repositories for each major subsystem (mapping, controllers, vision, etc.).
+Everyone committed to the same repositories, without using forks. While using
+pull requests can have some benefits in terms of allowing team members to look
+at what has been changed in a specific pull request and decide if changes are
+required, in practice this sort of review process could only be done with a very
+focused team that already have quite a lot of experience with \texttt{git}. It
+would also be time consuming to have to do this, and time is already tight
+enough as it is in the course. We tried to use a version of the branching model
+described in \cite{nviebranch}. The idea is to use a branch \texttt{develop} in
+each repository to develop code, branching off of that to develop new features,
+in order not to force other members to pull code that is in the process of being
+developed. The \texttt{master} branch is pushed to whenever a milestone
+(release) is reached. While this may be a good branching model, in practice it
+is perhaps not so useful if there is only one person working in a single
+repository, as we often had. The good thing about it is that merging
+\texttt{develop} into \texttt{master} only when a milestone is reached means
+that the milestone code is easy to find, and it is possible to make sure that
+only working code is merged.
+
+There are some advantages to a multi-repository setup --- it is possible to work
+on one repository completely independent of the others, which minimises the
+number of merge commits and other issues that can be caused by having everything
+in a single repository. The disadvantage of this is that all repositories have
+to be pulled independently of each other, and if one forgets to do this it can
+cause problems due to not having up to date code. The advantages of this setup
+probably outweigh the disadvantages, however, because a single repository setup
+would require more use of branches, which have issues of their own.
+
+\subsection{System Setup}
+At the beginning of the project we decided to make separate users on the NUC,
+each with a separate \texttt{catkin} workspace. This worked well for us, as we
+were able to work on different versions of code without affecting other members'
+work. This came with the additional benefit that each member could launch their
+own part of the code for a specific task independently. It did come with the
+problem that each member had to pull updates to repositories, rather than having
+a single repository which was up to date all the time. Each user belonged to the
+same \texttt{robo} group, which allowed everyone to access each others' files. A
+very useful script was one that allowed for execution of catkin make from any
+directory, which saved having to switch between terminal windows or directories.
+The system setup took some time, but the small amount of time spent at
+the start was outweighed by the benefits.
+
+\subsection{ROS Specifics}
+We tried to keep to a specific structure for all nodes for consistency. Each
+node created is an object (although there are no duplicated nodes). This keeps
+the parameters of the node in its own scope, preventing possible issues with
+clashes. Each node loads parameters and sets up subscribers in its constructor.
+After all parameters are loaded, the node calls a function which executes the
+main loop of the node. This structure makes it easy to see exactly what the node
+is using by just looking at the constructor. In addition to this, we set up
+parameter files for nodes which could use different parameter settings. Since
+modifying extra parameters does not require recompilation, this saves time when
+looking for the best parameter settings. A global parameter file was used to
+store information about sensor positions and robot measurements. We make
+extensive use of launch files as a result of this setup. Each launch file loads
+the parameters that it requires. As such, it is possible to create a single
+launch file at the top level which runs multiple nodes. Another parameter file
+is used to define all topics that exist on the system. This means that one
+change can change the name of the topic in all nodes which make use of it. This
+means some additional parameter reading in nodes, but it lowers the likelihood
+of bugs where nodes are not subscribing or publishing to the correct topics.
+
+We implemented a utility library which was a wrapper around the parameter server
+which would load a parameter into a given variable, depending on the type of the
+variable. If the parameter was not present in the parameter server, an error
+would be thrown with information about the missing parameter. This helped to
+make parameter reading quicker and less prone to errors.
+
 \section{Conclusion}
 
-
+\nocite{*}
 \printbibliography
 
 
