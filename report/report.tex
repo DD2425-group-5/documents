@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper,twocolumn]{article}
+documentclass[10pt,a4paper,twocolumn]{article}
 
 \usepackage[top=1cm,bottom=2cm,left=2cm,right=2cm]{geometry}
 \usepackage{graphicx}
@@ -251,7 +251,7 @@ was written named simple explorer.
 \end{figure}
 \subsection{Explorer}
 The simple explorer uses the same principle of storing sensor data in a byte but
-had a separate integer that stored the state. This reduced the  number of
+had a separate integer that stored the state. This reduced the  number of
 necessary state functions from 63 to 5. These states are if you dont have an
 contact on the left side or the right side go forward. If sensor reading comes
 from the front facing sensors turn 90 degrees to the left or right if there is
@@ -595,7 +595,17 @@ having a map is beneficial when new areas need to be explored, but we decided
 that this was not a problem.
 
 \subsection{Topological Map}
-\section{Localisation and Navigation}
+\section{Odometry, Localisation and Navigation}
+\subsection{Odometry}
+The odometry was only facilitated through the use of motor encoders and careful controller tuning as to not let any slippage occur. Using the IMU was prematurely decided against since we had problems with the script that was running it. 
+The odometry returned the total amount of distance travelled, the current heading and the absolute X and Y coordinates, all derived using the motion model of the robot, found \href{http://goo.gl/SGA99c}{here}.
+\subsection{Localisation}
+Localisation was implicit in Navigation as it did not include any filtering, i.e. localization was simply the task of referring the output of the odometry to the beginning of the coordinate system and thus to the node map, since it has metric data. That was done with a simple euclidean distance measure which was used as a threshold of whether the robot is on a certain node or not. 
+\subsection{Navigation}
+Navigation was implemented as a dual state system - either following the trajectory, described the map, or wallowing for when there were straight walls to help with the reduction of odometry error. While the wallfollowing was already well defined, we needed to implement the navigation capability separately. We used a BFS algorithm to find a path between two nodes. After that path following was done by using the difference of the vectors of the current position and that of the target (next accessible node of the path) and having this vector serve as the reference heading of the robot. Thus, there is a controller which makes sure the difference in angle between the heading of the robot and the reference vector is zero. That however added a serious problem - due to odometry errors the path was not always parallel to the walls, which meant that we needed to use a controller which aligns the map to the closest straight wall while the robot was following said map. This ensured that the map will always be aligned to the last seen wall, thereby reducing the error in heading significantly. Please note, that unfortunately we did not have time to implement an explorer which is capable of venturing away from the walls on its own accord, which meant that there was no point in investing time in tuning the tricky cascade of 3 controllers and the node got abandoned. 
+Not all of it, though. A part of it got transplanted into the Advanced Explorer to create a new node under a new name - Fetch. This node uses localization to determine if the robot has reached the position from which a desired object can be seen. Of course it relays on the fact that the map is consecutive and deterministic, since we do not venture away from the walls very often. This meant that the task of fetching could be completed for about half of the objects. The Fetch node was proven to work in the lab, but was not used in the competition due to failure to get a map in the first run.   
+
+
 \section{Work Environment}
 \subsection{Version Control}
 For source control, we used \texttt{git}, with repositories on GitHub. Each of
