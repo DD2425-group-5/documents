@@ -6,6 +6,12 @@
 # LaTeX
 *.log
 *.aux
+*.out
+*.toc
+*.blg
+*.bcf
+*.bbl
+*-blx.bib
 
 # AUCTex
 auto
