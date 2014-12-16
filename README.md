@@ -2,17 +2,18 @@ Link to github repositories:
 https://github.com/DD2425-group-5
 
 We have one repository for each part:
-1. `documents` - just various documents, no code here
-2. `mapping` - stuff to do with mapping
-3. `controllers` - motor controller and the exploration.
-4. `navigation` - phase 2, object fetching
-5. `utilities` - various utilities. 
-6. `vision` - everything vision-related
-7. `scripts` - scripts for setup. No code.
-8. `hardware` - sensors, odometry
-9. `launch` - launch files
-10. `localization` - never used
-11. `ras_arduino_msgs` - just forked repository, we haven't changed anything in it.
+
+* `documents` - just various documents, no code here
+* `mapping` - stuff to do with mapping
+* `controllers` - motor controller and the exploration.
+* `navigation` - phase 2, object fetching
+* `utilities` - various utilities. 
+* `vision` - everything vision-related
+* `scripts` - scripts for setup. No code.
+* `hardware` - sensors, odometry
+* `launch` - launch files
+* `localization` - never used
+* `ras_arduino_msgs` - just forked repository, we haven't changed anything in it.
 
 
 # Compiling
@@ -36,14 +37,13 @@ We did at one point have a global launch file, but then we didn't update it and
 never bothered to fix it. So we use multiple launch files. To launch everything
 (this is phase 1, launches explorer, mapping and vision):
 
-    roscore 						//to be able to run python script
-    * run the python script *				//run the python script
-	roslaunch ir_sensors ir_sensors.launch 		//IR sensor launch file
-	roslaunch mapping_launch topological.launch 		//launches map recording
-	roslaunch odometry odometry.launch			//launch
-	roslaunch motor_controller3 pcontrol.launch    	//motor controller
+    roslaunch project_launch arduino.launch       //run the python script
+	roslaunch ir_sensors ir_sensors.launch 		  //IR sensor launch file
+	roslaunch mapping_launch topological.launch   //launches map recording
+	roslaunch odometry odometry.launch			  //launch
+	roslaunch motor_controller3 pcontrol.launch   //motor controller
 	roslaunch vision_master object_detection.launch 	//everything with vision
-	roslaunch complex_explorer complex_explorer.launch	//the explorer, once tihs is ran the robot starts moving.
+	roslaunch complex_explorer complex_explorer.launch	//the explorer, once this is run the robot starts moving.
 
 
 We didn't really use the fetch, but it works and here is the launch command:
